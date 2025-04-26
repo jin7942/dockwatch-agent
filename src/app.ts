@@ -1,5 +1,5 @@
 import express from 'express';
-import { serverController } from '@/server/controller/server.controller';
+import { serverController } from './server/controller/server.controller';
 
 const app = express();
 

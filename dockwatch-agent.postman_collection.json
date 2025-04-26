@@ -1,0 +1,30 @@
+{
+    "info": {
+        "name": "dockwatch-agent",
+        "description": "dockwatch-agent API Collection",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Server",
+            "description": "서버 관련 API",
+            "item": [
+                {
+                    "name": "Get Server Info",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:3000/api/server/info",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "7000",
+                            "path": ["api", "server", "info"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ]
+}

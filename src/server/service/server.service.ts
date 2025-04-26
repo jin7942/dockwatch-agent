@@ -1,4 +1,4 @@
-import { SysInfoVo, CpuInfoVo, MemoryInfoVo, DiskInfoVo } from '@/server/dto/server.vo';
+import { SysInfoVo, CpuInfoVo, MemoryInfoVo, DiskInfoVo } from '../dto/server.vo';
 import si from 'systeminformation';
 
 /**
