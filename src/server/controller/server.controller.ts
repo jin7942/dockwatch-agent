@@ -56,7 +56,7 @@ serverController.get('/mount-disk', async (req: Request, res: Response) => {
  * @route GET /api/server/container-disk
  * @returns 컨테이너별 디스크 사용량 배열을 포함한 JSON 응답
  */
-serverController.get('container-disk', async (req: Request, res: Response) => {
+serverController.get('/container-disk', async (req: Request, res: Response) => {
     try {
         const resData = await serverService.getDiskUsageByContainer();
         res.status(200).json(createResponseVo(true, '조회 성공', resData));
