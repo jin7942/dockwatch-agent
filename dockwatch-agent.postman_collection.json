@@ -15,11 +15,26 @@
                         "method": "GET",
                         "header": [],
                         "url": {
-                            "raw": "http://localhost:3000/api/server/info",
+                            "raw": "http://localhost:7000/api/server/info",
                             "protocol": "http",
                             "host": ["localhost"],
                             "port": "7000",
                             "path": ["api", "server", "info"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Network interface info",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:7000/api/server/network-interfaces",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "7000",
+                            "path": ["api", "server", "network-interfaces"]
                         }
                     },
                     "response": []

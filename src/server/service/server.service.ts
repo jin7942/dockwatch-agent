@@ -1,5 +1,14 @@
-import { SysInfoVo, CpuInfoVo, MemoryInfoVo, DiskInfoVo } from '../dto/server.vo';
+import { SysInfoVo, CpuInfoVo, MemoryInfoVo, DiskInfoVo, SysNetworkInfoVo } from '../dto/server.vo';
 import si from 'systeminformation';
+
+// systeminformation networkInterfaces() 결과를 위한 내부 타입
+interface SiNetworkInterfaceData {
+    iface: string;
+    ip4: string;
+    ip4subnet: string;
+    mac: string;
+    speed: number;
+}
 
 /**
  * 서버 서비스 클래스
@@ -66,6 +75,24 @@ export class ServerService {
         };
 
         return diskInfoVo;
+    }
+
+    /**
+     * 서버 네트워크 인터페이스 정보
+     * @returns 네트워크 정보가 담긴 배열
+     */
+    public async getSysNetworkInfo(): Promise<SysNetworkInfoVo[]> {
+        const netDataArray = (await si.networkInterfaces()) as SiNetworkInterfaceData[];
+
+        const networkList: SysNetworkInfoVo[] = netDataArray.map((net) => ({
+            interface: net.iface,
+            ip4: net.ip4,
+            ip4Subnet: net.ip4subnet,
+            mac: net.mac,
+            speed: net.speed,
+        }));
+
+        return networkList;
     }
 }
 

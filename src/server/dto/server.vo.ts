@@ -8,12 +8,31 @@ export interface SysInfoVo {
     memory: MemoryInfoVo;
     disk: DiskInfoVo;
 }
+/**
+ * 서버 네트워크 인터페이스 정보
+ */
+export interface SysNetworkInfoVo {
+    /** 네트워크 인터페이스 이름 (ex: eth0) */
+    interface: string;
+
+    /** IPv4 주소 (ex: 192.168.0.10) */
+    ip4: string;
+
+    /** IPv4 서브넷 (ex: ) */
+    ip4Subnet: string;
+
+    /** MAC 주소 (ex: 00:1B:44:11:3A:B7) */
+    mac: string;
+
+    /** 링크 속도 (Mbps) */
+    speed: number;
+}
 
 /**
  * CPU 정보
  */
 export interface CpuInfoVo {
-    /** CPU 모델명 (예: Intel Core i5-5000) */
+    /** CPU 모델명 (ex: Intel Core i5-5000) */
     model: string;
 
     /** CPU 기본 클럭 속도 (GHz 단위) */
@@ -41,9 +60,9 @@ export interface MemoryInfoVo {
  * 디스크 정보
  */
 export interface DiskInfoVo {
-    /** 총 디스크 용량 (예: "512 GB") */
+    /** 총 디스크 용량 (ex: "512 GB") */
     total: number;
 
-    /** 사용 중인 디스크 용량 (예: "320 GB") */
+    /** 사용 중인 디스크 용량 (ex: "320 GB") */
     used: number;
 }
