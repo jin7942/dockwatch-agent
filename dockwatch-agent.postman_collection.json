@@ -38,6 +38,21 @@
                         }
                     },
                     "response": []
+                },
+                {
+                    "name": "Get Disk usage by mount",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:7000/api/server/mount-disk",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "7000",
+                            "path": ["api", "server", "mount-disk"]
+                        }
+                    },
+                    "response": []
                 }
             ]
         }

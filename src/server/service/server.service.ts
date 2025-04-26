@@ -1,4 +1,11 @@
-import { SysInfoVo, CpuInfoVo, MemoryInfoVo, DiskInfoVo, SysNetworkInfoVo } from '../dto/server.vo';
+import {
+    SysInfoVo,
+    CpuInfoVo,
+    MemoryInfoVo,
+    DiskInfoVo,
+    SysNetworkInfoVo,
+    DiskUsageByMountVo,
+} from '../dto/server.vo';
 import si from 'systeminformation';
 
 // systeminformation networkInterfaces() 결과를 위한 내부 타입
@@ -83,7 +90,6 @@ export class ServerService {
      */
     public async getSysNetworkInfo(): Promise<SysNetworkInfoVo[]> {
         const netDataArray = (await si.networkInterfaces()) as SiNetworkInterfaceData[];
-
         const networkList: SysNetworkInfoVo[] = netDataArray.map((net) => ({
             interface: net.iface,
             ip4: net.ip4,
@@ -93,6 +99,22 @@ export class ServerService {
         }));
 
         return networkList;
+    }
+
+    /**
+     * 마운트별 디스크 사용량
+     * @returns 디스크 사용량 배열
+     */
+    public async getDiskUsageByMount(): Promise<DiskUsageByMountVo[]> {
+        const fsData = await si.fsSize();
+        const diskList: DiskUsageByMountVo[] = fsData.map((disk) => ({
+            mountPath: disk.fs,
+            total: disk.size,
+            used: disk.used,
+            use: disk.use,
+        }));
+
+        return diskList;
     }
 }
 

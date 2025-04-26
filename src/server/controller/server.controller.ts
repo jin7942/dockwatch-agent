@@ -35,4 +35,29 @@ serverController.get('/network-interfaces', async (req: Request, res: Response) 
     }
 });
 
+/**
+ * 마운트별 디스크 사용량 조회 API
+ *
+ * @route GET /api/server/mount-disk
+ * @returns 마운트별 디스크 사용량 배열을 포함한 JSON 응답
+ */
+serverController.get('/mount-disk', async (req: Request, res: Response) => {
+    try {
+        const resData = await serverService.getDiskUsageByMount();
+        res.status(200).json(createResponseVo(true, '조회 성공', resData));
+    } catch (e) {
+        res.status(500).json(createResponseVo(false, '조회 실패', e));
+    }
+});
+
+// 템플릿 복사해서 쓰셈
+// serverController.get('', async( req: Request, res: Response) => {
+//     try {
+//         const resData = await ;
+//         res.status(200).json(createResponseVo(true, '조회 성공', resData))
+//     } catch(e) {
+//         res.status(500).json(createResponseVo(false, '조회 실패', e))
+//     }
+// })
+
 export { serverController };
