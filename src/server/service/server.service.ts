@@ -1,3 +1,4 @@
+// interface 정의
 import {
     SysInfoVo,
     CpuInfoVo,
@@ -5,8 +6,16 @@ import {
     DiskInfoVo,
     SysNetworkInfoVo,
     DiskUsageByMountVo,
+    DiskUsageByContainerVo,
 } from '../dto/server.vo';
+
+// 라이브러리
 import si from 'systeminformation';
+import { exec } from 'child_process';
+import util from 'util';
+
+// 직접 구현한 유틸 모듈
+import { parseSize } from '../../common/utils/utilParser';
 
 // systeminformation networkInterfaces() 결과를 위한 내부 타입
 interface SiNetworkInterfaceData {
@@ -103,7 +112,7 @@ export class ServerService {
 
     /**
      * 마운트별 디스크 사용량
-     * @returns 디스크 사용량 배열
+     * @returns 마운트별 디스크 사용량 배열
      */
     public async getDiskUsageByMount(): Promise<DiskUsageByMountVo[]> {
         const fsData = await si.fsSize();
@@ -115,6 +124,39 @@ export class ServerService {
         }));
 
         return diskList;
+    }
+
+    /**
+     * 컨테이너별 디스크 사용량 조회
+     * @returns 컨테이너별 디스크 사용량 배열
+     */
+    public async getDiskUsageByContainer(): Promise<DiskUsageByContainerVo[]> {
+        const execAsync = util.promisify(exec);
+
+        // 1. 실행 중인 컨테이너 ID 목록 가져오기
+        const { stdout: psStdout } = await execAsync('docker ps --format "{{.ID}}"');
+        const runningContainerIds = psStdout.split('\n').filter((id) => id);
+
+        // 2. 전체 컨테이너 디스크 사용량 가져오기
+        const { stdout: dfStdout } = await execAsync('docker system df -v');
+        const lines = dfStdout.split('\n');
+
+        // 3. 필요한 부분 필터링
+        const containerLines = lines.filter((line) => {
+            return runningContainerIds.some((id) => line.startsWith(id));
+        });
+
+        // 4. 매핑
+        const containerUsageList: DiskUsageByContainerVo[] = containerLines.map((line) => {
+            const parts = line.split(/\s+/);
+            return {
+                name: parts[1], // 컨테이너 이름
+                used: parseSize(parts[2]), // 사용량
+                isActive: true, // running만 가져오니까 무조건 true
+            };
+        });
+
+        return containerUsageList;
     }
 }
 

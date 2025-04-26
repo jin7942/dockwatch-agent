@@ -77,9 +77,6 @@ export interface DiskUsageByContainerVo {
     /** 사용량 (bytes) */
     used: number;
 
-    /** 마운트 경로 (ex: '/mnt/data') */
-    mountPath: string;
-
     /** 컨테이너 실행 상태 (ex: true / false) */
     isActive: boolean;
 }

@@ -50,6 +50,21 @@ serverController.get('/mount-disk', async (req: Request, res: Response) => {
     }
 });
 
+/**
+ * 컨테이너별 디스크 사용량 조회 API
+ *
+ * @route GET /api/server/container-disk
+ * @returns 컨테이너별 디스크 사용량 배열을 포함한 JSON 응답
+ */
+serverController.get('container-disk', async (req: Request, res: Response) => {
+    try {
+        const resData = await serverService.getDiskUsageByContainer();
+        res.status(200).json(createResponseVo(true, '조회 성공', resData));
+    } catch (e) {
+        res.status(500).json(createResponseVo(false, '조회 실패', e));
+    }
+});
+
 // 템플릿 복사해서 쓰셈
 // serverController.get('', async( req: Request, res: Response) => {
 //     try {
