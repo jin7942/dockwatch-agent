@@ -1,7 +1,7 @@
 {
     "name": "dockwatch-agent",
     "version": "1.0.0",
-    "main": "index.js",
+    "main": "src/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "ts-node src/index.ts",
@@ -27,6 +27,7 @@
     "devDependencies": {
         "@types/express": "^5.0.1",
         "@types/node": "^22.15.2",
+        "@types/ws": "^8.18.1",
         "ts-node": "^10.9.2",
         "typescript": "^5.8.3"
     }
