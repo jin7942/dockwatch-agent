@@ -7,7 +7,7 @@ import {
     SysNetworkInfoVo,
     DiskUsageByMountVo,
     DiskUsageByContainerVo,
-} from '../dto/server.vo';
+} from '../dto/server-http.vo';
 
 // 라이브러리
 import si from 'systeminformation';
@@ -49,7 +49,7 @@ export class ServerService {
      * CPU 기본 정보 조회 함수
      * @returns CPU 기본 정보를 담은 CpuInfo 객체
      */
-    public getCpuInfo = async (): Promise<CpuInfoVo> => {
+    private getCpuInfo = async (): Promise<CpuInfoVo> => {
         const cpuData = await si.cpu();
         const cpuInfoVo: CpuInfoVo = {
             model: `${cpuData.manufacturer} ${cpuData.brand}`, // 제조사 + 브랜드 조합
@@ -65,7 +65,7 @@ export class ServerService {
      * 메모리 사이즈 조회 함수
      * @returns 메모리 사이즈, 사용량
      */
-    public getMemoryInfo = async (): Promise<MemoryInfoVo> => {
+    private getMemoryInfo = async (): Promise<MemoryInfoVo> => {
         const memoryData = await si.mem();
         const memoryInfoVo: MemoryInfoVo = {
             total: memoryData.total,
@@ -79,7 +79,7 @@ export class ServerService {
      * 디스크 사이즈 조회 함수
      * @returns 디스크 총 용량, 사용량
      */
-    public getDiskInfo = async (): Promise<DiskInfoVo> => {
+    private getDiskInfo = async (): Promise<DiskInfoVo> => {
         const fsData = await si.fsSize();
 
         const total = fsData.reduce((acc, disk) => acc + disk.size, 0);

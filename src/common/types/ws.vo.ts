@@ -15,3 +15,26 @@ export interface WsVo<T> {
     /** 실시간 전송할 실제 데이터 */
     data: T;
 }
+
+/**
+ * WebSocket용 toptable 전역 인터페이스 정의
+ */
+export interface TopTableStreamVo {
+    /** 정렬 순서 */
+    idx: number;
+
+    /** 프로세스 ID (ex: 1234) */
+    pid: number;
+
+    /** 실행 유저 (ex: 'user') */
+    user: string;
+
+    /** 상태 (ex: 'running', 'sleep' 등) */
+    s: string;
+
+    /** 메모리 사용 비율 (ex: 2.3) */
+    mem: number;
+
+    /** 실행 명령어 (ex: 'myusqld'등) */
+    command: string;
+}

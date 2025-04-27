@@ -7,7 +7,7 @@
     "item": [
         {
             "name": "Server",
-            "description": "서버 관련 API",
+            "description": "서버 관련 API(WebSocket은 컬렉션 지원이 불가하므로 직접 추가해야됨)",
             "item": [
                 {
                     "name": "Get Server Info",
@@ -50,6 +50,37 @@
                             "host": ["localhost"],
                             "port": "7000",
                             "path": ["api", "server", "mount-disk"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Disk usage by container",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:7000/api/server/mount-container",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "7000",
+                            "path": ["api", "server", "container-disk"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Ws Server Usage",
+                    "event": [],
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "ws://localhost:7000/ws/server/usage",
+                            "protocol": "ws",
+                            "host": ["localhost"],
+                            "port": "7000",
+                            "path": ["ws", "server", "usage"]
                         }
                     },
                     "response": []

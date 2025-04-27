@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ServerService } from '../service/server.service';
+import { ServerService } from '../service/server-http.service';
 import { createResponseVo } from '../../common/utils/utilCreate';
 
 /**

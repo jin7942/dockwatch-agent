@@ -1,0 +1,40 @@
+import { TopTableStreamVo } from '../../common/types/ws.vo';
+
+/**
+ * 서버 실시간 사용량 제공
+ */
+export interface UsageStreamVo {
+    cpu: CpuUsageStreamVo;
+    memory: MemoryUsageStreamVo;
+    disk: DiskUsageStreamVo;
+}
+
+/**
+ * 실시간 CPU 사용량
+ */
+export interface CpuUsageStreamVo {
+    /**  사용율 (ex: 30) */
+    usagePersent: number;
+
+    /** CPU 사용 top table */
+    topTable: TopTableStreamVo[];
+}
+
+/**
+ * 실시간 메모리 사용량
+ */
+export interface MemoryUsageStreamVo {
+    /** 사용율 (ex: 30) */
+    usagePersent: number;
+
+    /** 메모리 사용 top table */
+    topTable: TopTableStreamVo[];
+}
+
+/**
+ * 실시간 디스크 I/O 속도(평균)
+ */
+export interface DiskUsageStreamVo {
+    /** 초당 I/O 평균 (ex: 30000)(bps) */
+    activity: number;
+}
