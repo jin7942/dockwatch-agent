@@ -34,7 +34,7 @@ export class ServerService {
      * 서버 기본 정보 조회 함수
      * @returns 서버 기본 정보(cpu, memory, disk)를 담은 SysInfoVo 객체
      */
-    public async getSysInfo(): Promise<SysInfoVo> {
+    public getSysInfo = async (): Promise<SysInfoVo> => {
         const [cpu, memory, disk] = await Promise.all([
             this.getCpuInfo(),
             this.getMemoryInfo(),
@@ -43,13 +43,13 @@ export class ServerService {
         const sysInfoVo: SysInfoVo = { cpu, memory, disk };
 
         return sysInfoVo;
-    }
+    };
 
     /**
      * CPU 기본 정보 조회 함수
      * @returns CPU 기본 정보를 담은 CpuInfo 객체
      */
-    public async getCpuInfo(): Promise<CpuInfoVo> {
+    public getCpuInfo = async (): Promise<CpuInfoVo> => {
         const cpuData = await si.cpu();
         const cpuInfoVo: CpuInfoVo = {
             model: `${cpuData.manufacturer} ${cpuData.brand}`, // 제조사 + 브랜드 조합
@@ -59,13 +59,13 @@ export class ServerService {
         };
 
         return cpuInfoVo;
-    }
+    };
 
     /**
      * 메모리 사이즈 조회 함수
      * @returns 메모리 사이즈, 사용량
      */
-    public async getMemoryInfo(): Promise<MemoryInfoVo> {
+    public getMemoryInfo = async (): Promise<MemoryInfoVo> => {
         const memoryData = await si.mem();
         const memoryInfoVo: MemoryInfoVo = {
             total: memoryData.total,
@@ -73,13 +73,13 @@ export class ServerService {
         };
 
         return memoryInfoVo;
-    }
+    };
 
     /**
      * 디스크 사이즈 조회 함수
      * @returns 디스크 총 용량, 사용량
      */
-    public async getDiskInfo(): Promise<DiskInfoVo> {
+    public getDiskInfo = async (): Promise<DiskInfoVo> => {
         const fsData = await si.fsSize();
 
         const total = fsData.reduce((acc, disk) => acc + disk.size, 0);
@@ -91,13 +91,13 @@ export class ServerService {
         };
 
         return diskInfoVo;
-    }
+    };
 
     /**
      * 서버 네트워크 인터페이스 정보
      * @returns 네트워크 정보가 담긴 배열
      */
-    public async getSysNetworkInfo(): Promise<SysNetworkInfoVo[]> {
+    public getSysNetworkInfo = async (): Promise<SysNetworkInfoVo[]> => {
         const netDataArray = (await si.networkInterfaces()) as SiNetworkInterfaceData[];
         const networkList: SysNetworkInfoVo[] = netDataArray.map((net) => ({
             interface: net.iface,
@@ -108,13 +108,13 @@ export class ServerService {
         }));
 
         return networkList;
-    }
+    };
 
     /**
      * 마운트별 디스크 사용량
      * @returns 마운트별 디스크 사용량 배열
      */
-    public async getDiskUsageByMount(): Promise<DiskUsageByMountVo[]> {
+    public getDiskUsageByMount = async (): Promise<DiskUsageByMountVo[]> => {
         const fsData = await si.fsSize();
         const diskList: DiskUsageByMountVo[] = fsData.map((disk) => ({
             mountPath: disk.fs,
@@ -124,13 +124,13 @@ export class ServerService {
         }));
 
         return diskList;
-    }
+    };
 
     /**
      * 컨테이너별 디스크 사용량 조회
      * @returns 컨테이너별 디스크 사용량 배열
      */
-    public async getDiskUsageByContainer(): Promise<DiskUsageByContainerVo[]> {
+    public getDiskUsageByContainer = async (): Promise<DiskUsageByContainerVo[]> => {
         const execAsync = util.promisify(exec);
 
         // 1. 실행 중인 컨테이너 ID 목록 가져오기
@@ -157,7 +157,7 @@ export class ServerService {
         });
 
         return containerUsageList;
-    }
+    };
 }
 
 // 테스트용 코드

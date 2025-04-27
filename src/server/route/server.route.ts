@@ -5,17 +5,15 @@ const serverRouter = Router();
 const serverController = new ServerController();
 
 // GET /api/server/info
-serverRouter.get('/info', serverController.getSysInfo.bind(serverController));
+serverRouter.get('/info', serverController.getSysInfo);
 
 // GET /api/server/network-interfaces
-serverRouter.get('/network-interfaces', serverController.getSysNetworkInfo.bind(serverController));
+serverRouter.get('/network-interfaces', serverController.getSysNetworkInfo);
 
 // GET /api/server/container-disk
-serverRouter.get(
-    '/container-disk',
-    serverController.getDiskUsageByContainer.bind(serverController),
-);
+serverRouter.get('/container-disk', serverController.getDiskUsageByContainer);
+
 // GET /api/server/mount-disk
-serverRouter.get('/mount-disk', serverController.getDiskUsageByMount.bind(serverController));
+serverRouter.get('/mount-disk', serverController.getDiskUsageByMount);
 
 export { serverRouter };
