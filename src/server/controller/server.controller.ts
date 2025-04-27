@@ -1,78 +1,85 @@
-import { Router, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { ServerService } from '../service/server.service';
 import { createResponseVo } from '../../common/utils/utilCreate';
 
-const serverController = Router();
-const serverService = new ServerService();
-
 /**
- * 서버 기본 정보 조회 API
- *
- * @route GET /api/server/info
- * @returns 서버의 CPU, 메모리, 디스크 기본 정보를 포함한 JSON 응답
+ * 서버 컨트롤러 클래스
  */
-serverController.get('/info', async (req: Request, res: Response) => {
-    try {
-        const resData = await serverService.getSysInfo();
-        res.status(200).json(createResponseVo(true, '조회 성공', resData));
-    } catch (e) {
-        res.status(500).json(createResponseVo(false, '조회 실패', e));
+export class ServerController {
+    private serverService = new ServerService();
+
+    /**
+     * 서버 기본 정보 조회 API
+     *
+     * @route GET /api/server/info
+     * @returns 서버의 CPU, 메모리, 디스크 기본 정보를 포함한 JSON 응답
+     */
+    public async getSysInfo(req: Request, res: Response): Promise<void> {
+        try {
+            const resData = await this.serverService.getSysInfo();
+            res.status(200).json(createResponseVo(true, '조회 성공', resData));
+        } catch (e) {
+            const message = e instanceof Error ? e.message : '조회 실패';
+            res.status(500).json(createResponseVo(false, message, null));
+        }
     }
-});
 
-/**
- * 네트워크 인터페이스 조회 API
- *
- * @route GET /api/server/network-interfaces
- * @returns 서버의 네트워크 인터페이스 정보를 포함한 JSON 응답
- */
-serverController.get('/network-interfaces', async (req: Request, res: Response) => {
-    try {
-        const resData = await serverService.getSysNetworkInfo();
-        res.status(200).json(createResponseVo(true, '조회 성공', resData));
-    } catch (e) {
-        res.status(500).json(createResponseVo(false, '조회 실패', e));
+    /**
+     * 네트워크 인터페이스 조회 API
+     *
+     * @route GET /api/server/network-interfaces
+     * @returns 서버의 네트워크 인터페이스 정보를 포함한 JSON 응답
+     */
+    public async getSysNetworkInfo(req: Request, res: Response): Promise<void> {
+        try {
+            const resData = await this.serverService.getSysNetworkInfo();
+            res.status(200).json(createResponseVo(true, '조회 성공', resData));
+        } catch (e) {
+            const message = e instanceof Error ? e.message : '조회 실패';
+            res.status(500).json(createResponseVo(false, message, null));
+        }
     }
-});
 
-/**
- * 마운트별 디스크 사용량 조회 API
- *
- * @route GET /api/server/mount-disk
- * @returns 마운트별 디스크 사용량 배열을 포함한 JSON 응답
- */
-serverController.get('/mount-disk', async (req: Request, res: Response) => {
-    try {
-        const resData = await serverService.getDiskUsageByMount();
-        res.status(200).json(createResponseVo(true, '조회 성공', resData));
-    } catch (e) {
-        res.status(500).json(createResponseVo(false, '조회 실패', e));
+    /**
+     * 마운트별 디스크 사용량 조회 API
+     *
+     * @route GET /api/server/mount-disk
+     * @returns 마운트별 디스크 사용량 배열을 포함한 JSON 응답
+     */
+    public async getDiskUsageByMount(req: Request, res: Response): Promise<void> {
+        try {
+            const resData = await this.serverService.getDiskUsageByMount();
+            res.status(200).json(createResponseVo(true, '조회 성공', resData));
+        } catch (e) {
+            const message = e instanceof Error ? e.message : '조회 실패';
+            res.status(500).json(createResponseVo(false, message, null));
+        }
     }
-});
 
-/**
- * 컨테이너별 디스크 사용량 조회 API
- *
- * @route GET /api/server/container-disk
- * @returns 컨테이너별 디스크 사용량 배열을 포함한 JSON 응답
- */
-serverController.get('/container-disk', async (req: Request, res: Response) => {
-    try {
-        const resData = await serverService.getDiskUsageByContainer();
-        res.status(200).json(createResponseVo(true, '조회 성공', resData));
-    } catch (e) {
-        res.status(500).json(createResponseVo(false, '조회 실패', e));
+    /**
+     * 컨테이너별 디스크 사용량 조회 API
+     *
+     * @route GET /api/server/container-disk
+     * @returns 컨테이너별 디스크 사용량 배열을 포함한 JSON 응답
+     */
+    public async getDiskUsageByContainer(req: Request, res: Response): Promise<void> {
+        try {
+            const resData = await this.serverService.getDiskUsageByContainer();
+            res.status(200).json(createResponseVo(true, '조회 성공', resData));
+        } catch (e) {
+            const message = e instanceof Error ? e.message : '조회 실패';
+            res.status(500).json(createResponseVo(false, message, null));
+        }
     }
-});
 
-// 템플릿 복사해서 쓰셈
-// serverController.get('', async( req: Request, res: Response) => {
-//     try {
-//         const resData = await ;
-//         res.status(200).json(createResponseVo(true, '조회 성공', resData))
-//     } catch(e) {
-//         res.status(500).json(createResponseVo(false, '조회 실패', e))
-//     }
-// })
-
-export { serverController };
+    // 템플릿 복사해서 쓰셈
+    // public async (req: Request, res: Response): Promise<void> {
+    //     try {
+    //         const resData = await this.serverService;
+    //         res.status(200).json(createResponseVo(true, '조회 성공', resData));
+    //     } catch (e) {
+    //         const message = e instanceof Error ? e.message : '조회 실패';
+    //         res.status(500).json(createResponseVo(false, message, null));
+    //     }
+    // }
+}

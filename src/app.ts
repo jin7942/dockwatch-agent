@@ -1,5 +1,5 @@
 import express from 'express';
-import { serverController } from './server/controller/server.controller';
+import { serverRouter } from './server/route/server.route';
 
 const app = express();
 
@@ -7,6 +7,6 @@ const app = express();
 app.use(express.json());
 
 // API 라우트 등록
-app.use('/api/server', serverController);
+app.use('/api/server', serverRouter);
 
 export default app;
