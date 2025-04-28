@@ -71,7 +71,7 @@ export const initWebSocketServer = (server: HttpServer) => {
             extWs.isAlive = false;
             extWs.ping();
         });
-    }, 30000); // 30초 간격
+    }, 10000); // 10초 간격
 
     wss.on('close', () => {
         clearInterval(interval);

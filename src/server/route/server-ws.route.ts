@@ -2,7 +2,7 @@ import { WebSocket } from 'ws';
 import { ServerWsController } from '../controller/server-ws.controller';
 
 export class ServerWsRouter {
-    private serverWsController = new ServerWsController();
+    private serverWsController: ServerWsController = new ServerWsController();
 
     public handle = (ws: WebSocket, pathname: string) => {
         // 라우팅 테이블

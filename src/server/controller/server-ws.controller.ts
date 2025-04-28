@@ -1,6 +1,7 @@
 import { WebSocket } from 'ws';
 import { ServerWsService } from '../service/server-ws.service';
 import { setWsIntervalSender } from '../../common/utils/utilWs';
+import { WsVo } from '../../common/types/ws.vo';
 import os from 'os';
 /**
  * 서버 리소스 WebSocket 컨트롤러
@@ -13,7 +14,7 @@ export class ServerWsController {
      * 서버 사용량 통합 실시간 스트림 핸들러
      *
      * @route CONNECTION /ws/server/usage
-     * @param ws 클라이언트 WebSocket 객체
+     * @param {WsVo<UsageStreamVo>} 클라이언트 WebSocket
      */
     public handleServerUsageStream = (ws: WebSocket): void => {
         setWsIntervalSender(
@@ -28,7 +29,7 @@ export class ServerWsController {
      * 네트워크 송수신량(bps) 실시간 스트림 핸들러
      *
      * @route CONNECTION /ws/server/network
-     * @param ws 클라이언트 WebSocket 객체
+     * @param {WsVo<NetworkUsageStreamVo[]>} 클라이언트 WebSocket
      */
     public hadnleNetworkUsageStream = (ws: WebSocket): void => {
         setWsIntervalSender(

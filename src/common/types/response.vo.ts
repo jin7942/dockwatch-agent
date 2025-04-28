@@ -1,5 +1,6 @@
 /**
  * 공통 HTTP 응답 포맷
+ * - {success: boolean, message: string, data: T}
  * @template T 실제 응답 데이터 타입
  */
 export interface ResponseVo<T> {

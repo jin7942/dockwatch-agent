@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import { ServerController } from '../controller/server-http.controller';
 
-const serverRouter = Router();
-const serverController = new ServerController();
+const serverRouter: Router = Router();
+const serverController: ServerController = new ServerController();
 
 // GET /api/server/info
 serverRouter.get('/info', serverController.getSysInfo);
