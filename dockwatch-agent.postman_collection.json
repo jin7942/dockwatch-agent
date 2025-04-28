@@ -84,6 +84,22 @@
                         }
                     },
                     "response": []
+                },
+                {
+                    "name": "Ws Netwrok Usage",
+                    "event": [],
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "ws://localhost:7000/ws/server/network",
+                            "protocol": "ws",
+                            "host": ["localhost"],
+                            "port": "7000",
+                            "path": ["ws", "server", "network"]
+                        }
+                    },
+                    "response": []
                 }
             ]
         }

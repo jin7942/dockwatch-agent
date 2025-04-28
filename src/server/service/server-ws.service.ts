@@ -4,6 +4,7 @@ import {
     CpuUsageStreamVo,
     MemoryUsageStreamVo,
     DiskUsageStreamVo,
+    NetworkUsageStreamVo,
 } from '../dto/server-ws.vo';
 import { TopTableStreamVo } from '../../common/types/ws.vo';
 
@@ -91,5 +92,21 @@ export class ServerWsService {
         const diskUsageStreamVo: DiskUsageStreamVo = { activity };
 
         return diskUsageStreamVo;
+    };
+
+    /**
+     * 실시간 네트워크 송수신량 조회
+     *
+     * @returns 인터페이스별 rx/tx 배열
+     */
+    public getNetworkUsage = async (): Promise<NetworkUsageStreamVo[]> => {
+        const stats = await si.networkStats();
+        const usage: NetworkUsageStreamVo[] = stats.map((stat) => ({
+            interface: stat.iface,
+            rx: stat.rx_sec,
+            tx: stat.tx_sec,
+        }));
+
+        return usage;
     };
 }

@@ -38,3 +38,17 @@ export interface DiskUsageStreamVo {
     /** 초당 I/O 평균 (ex: 30000)(bps) */
     activity: number;
 }
+
+/**
+ * 실시간 네트워크 사용량
+ */
+export interface NetworkUsageStreamVo {
+    /** 네트워크 인터 페이스 (ex: eth0) */
+    interface: string;
+
+    /** 초당 수신 바이트(bps) */
+    rx: number;
+
+    /** 초당 송신 바이트(bps) */
+    tx: number;
+}
