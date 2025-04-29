@@ -32,7 +32,7 @@ interface SiNetworkInterfaceData {
 export class ServerService {
     /**
      * 서버 기본 정보 조회 함수
-     * @returns {SysInfoVo} 서버 기본 정보(cpu, memory, disk)를 담은 SysInfoVo 객체
+     * @returns 서버 기본 정보(cpu, memory, disk)를 담은 SysInfoVo 객체
      */
     public getSysInfo = async (): Promise<SysInfoVo> => {
         const [cpu, memory, disk] = await Promise.all([
@@ -47,7 +47,7 @@ export class ServerService {
 
     /**
      * CPU 기본 정보 조회 함수
-     * @returns {CpuInfoVo} CPU 기본 정보를 담은 CpuInfoVo 객체
+     * @returns  CPU 기본 정보를 담은 CpuInfoVo 객체
      */
     private getCpuInfo = async (): Promise<CpuInfoVo> => {
         const cpuData = await si.cpu();
@@ -63,7 +63,7 @@ export class ServerService {
 
     /**
      * 메모리 사이즈 조회 함수
-     * @returns {MemoryInfoVo} 메모리 사이즈, 사용량
+     * @returns  메모리 사이즈, 사용량
      */
     private getMemoryInfo = async (): Promise<MemoryInfoVo> => {
         const memoryData = await si.mem();
@@ -77,7 +77,7 @@ export class ServerService {
 
     /**
      * 디스크 사이즈 조회 함수
-     * @returns {DiskInfoVo} 디스크 총 용량, 사용량
+     * @returns 디스크 총 용량, 사용량
      */
     private getDiskInfo = async (): Promise<DiskInfoVo> => {
         const fsData = await si.fsSize();
@@ -95,7 +95,7 @@ export class ServerService {
 
     /**
      * 서버 네트워크 인터페이스 정보
-     * @returns {SysNetworkInfoVo[]} 네트워크 정보가 담긴 배열
+     * @returns  네트워크 정보가 담긴 배열
      */
     public getSysNetworkInfo = async (): Promise<SysNetworkInfoVo[]> => {
         const netDataArray = (await si.networkInterfaces()) as SiNetworkInterfaceData[];
@@ -112,7 +112,7 @@ export class ServerService {
 
     /**
      * 마운트별 디스크 사용량
-     * @returns {DiskUsageByMountVo[]} 마운트별 디스크 사용량 배열
+     * @returns  마운트별 디스크 사용량 배열
      */
     public getDiskUsageByMount = async (): Promise<DiskUsageByMountVo[]> => {
         const fsData = await si.fsSize();
@@ -128,7 +128,7 @@ export class ServerService {
 
     /**
      * 컨테이너별 디스크 사용량 조회
-     * @returns {DiskUsageByContainerVo[]} 컨테이너별 디스크 사용량 배열
+     * @returns  컨테이너별 디스크 사용량 배열
      */
     public getDiskUsageByContainer = async (): Promise<DiskUsageByContainerVo[]> => {
         const execAsync = util.promisify(exec);

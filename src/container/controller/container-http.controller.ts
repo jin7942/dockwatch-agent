@@ -17,7 +17,7 @@ export class ContainerController {
      * 컨테이너 리스트 조회 API
      *
      * @route GET /api/container/list
-     * @returns {ResponseVo<Container[]>} 컨테이너 리스트
+     * @returns 컨테이너 리스트
      */
     public getContainerList = async (req: Request, res: Response): Promise<void> => {
         await sendHttpResponse(res, () => this.containerService.getContainerList());
@@ -28,7 +28,7 @@ export class ContainerController {
      *
      * @route GET /api/container/status?containerID=xxxxx
      * @param req 쿼리 스트링에서 containerId를 받는다.
-     * @returns {boolean} 조화 결과값 true / flase
+     * @returns 조화 결과값 true / flase
      */
     public getContainerStatus = async (req: Request, res: Response): Promise<void> => {
         const { containerId } = req.query;

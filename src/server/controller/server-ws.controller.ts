@@ -14,7 +14,7 @@ export class ServerWsController {
      * 서버 사용량 통합 실시간 스트림 핸들러
      *
      * @route CONNECTION /ws/server/usage
-     * @param {WsVo<UsageStreamVo>} 클라이언트 WebSocket
+     * @param 클라이언트 WebSocket
      */
     public handleServerUsageStream = (ws: WebSocket): void => {
         setWsIntervalSender(
@@ -29,7 +29,7 @@ export class ServerWsController {
      * 네트워크 송수신량(bps) 실시간 스트림 핸들러
      *
      * @route CONNECTION /ws/server/network
-     * @param {WsVo<NetworkUsageStreamVo[]>} 클라이언트 WebSocket
+     * @param  클라이언트 WebSocket
      */
     public hadnleNetworkUsageStream = (ws: WebSocket): void => {
         setWsIntervalSender(

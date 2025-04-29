@@ -8,7 +8,7 @@ export class ContainerService {
 
     /**
      * 컨테이너 리스트 조회
-     * @returns {Container[]} 컨테이너 리스트
+     * @returns  컨테이너 리스트
      */
     public getContainerList = async (): Promise<Container[]> => {
         // 'docker ps -a --format' 명령어 실행하여 컨테이너 목록 가져오기
@@ -37,7 +37,7 @@ export class ContainerService {
     /**
      * 실행 중인 컨테이너 존재 여부 확인
      * @param containerId 확인할 컨테이너 ID
-     * @returns {boolean} 컨테이너가 존재하는지 여부
+     * @returns 컨테이너가 존재하는지 여부 true / false
      */
     public getContainerStatus = async (containerId: string): Promise<boolean> => {
         // 실행 중인 컨테이너 ID 목록 가져오기

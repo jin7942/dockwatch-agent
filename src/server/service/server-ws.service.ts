@@ -14,7 +14,7 @@ export class ServerWsService {
     /**
      * 서버 실시간 사용량 통합 조회
      *
-     * @returns {UsageStreamVo} 실시간 사용량(CPU, MEMORY, DISK) 담긴 객체
+     * @returns  실시간 사용량(CPU, MEMORY, DISK) 담긴 객체
      */
     public getUsageSummary = async (): Promise<UsageStreamVo> => {
         const [cpu, memory, disk] = await Promise.all([
@@ -30,7 +30,7 @@ export class ServerWsService {
     /**
      * 실시간 네트워크 송수신량 조회
      *
-     * @returns {NetworkUsageStreamVo[]} 인터페이스별 rx/tx 배열
+     * @returns  인터페이스별 rx/tx 배열
      */
     public getNetworkUsage = async (): Promise<NetworkUsageStreamVo[]> => {
         const stats = await si.networkStats();
@@ -47,7 +47,7 @@ export class ServerWsService {
      * TopTable 생성을 위한 내부 유틸
      * @param processes
      * @param sortField ('cpu' | 'mem')
-     * @returns {TopTableStreamVo} 객체
+     * @returns  객체
      */
     private buildTopTable = (
         processes: si.Systeminformation.ProcessesData,
@@ -71,7 +71,7 @@ export class ServerWsService {
 
     /**
      * 실시간 CPU 사용률 + TopTable 조회
-     * @returns {CpuUsageStreamVo} CPU 사용률, TopTable 상위 10개 rows
+     * @returns CPU 사용률, TopTable 상위 10개 rows
      */
     private getCpuUsage = async (): Promise<CpuUsageStreamVo> => {
         const [load, processes] = await Promise.all([si.currentLoad(), si.processes()]);
@@ -85,7 +85,7 @@ export class ServerWsService {
     /**
      * 실시간 Memory 사용률 + TopTable 조회
      *
-     * @returns {MemoryUsageStreamVo} Memory 사용률, TopTable 상위 10개 rows
+     * @returns  Memory 사용률, TopTable 상위 10개 rows
      */
     private getMemoryUsage = async (): Promise<MemoryUsageStreamVo> => {
         const [mem, processes] = await Promise.all([si.mem(), si.processes()]);
@@ -100,7 +100,7 @@ export class ServerWsService {
     /**
      * 실시간 Disk I/O 평균 속도 조회
      *
-     * @returns {DiskUsageStreamVo} I/O 평균속도(bps)
+     * @returns I/O 평균속도(bps)
      */
     private getDiskUsage = async (): Promise<DiskUsageStreamVo> => {
         const io = await si.disksIO();
