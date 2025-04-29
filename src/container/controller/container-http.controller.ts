@@ -4,6 +4,8 @@ import { Container } from '../dto/container-http.vo';
 import { ContainerDto } from '../dto/container-http.dto';
 import { ContainerService } from '../service/container-http.service';
 import { createResponseVo } from '../../common/utils/create-util';
+import { CustomError } from '../../common/error/custom-error';
+import { HttpStatus } from '../../common/types/http-status.enum';
 
 export class ContainerController {
     private containerService = new ContainerService();
@@ -26,22 +28,22 @@ export class ContainerController {
      * @param req 쿼리 스트링에서 containerId를 받는다.
      * @returns 조회 결과값 true / false
      */
-    // TODO: 전역 에러 핸들러 적용해서 수정
     public getContainerStatus = async (req: Request, res: Response): Promise<void> => {
         const { containerId } = req.query;
 
         if (typeof containerId === 'string') {
             // 유효성 검증 후 처리
             if (!this.isValidContainerId(containerId)) {
-                res.status(400).json(
-                    createResponseVo(false, '유효하지 않은 컨테이너 ID입니다', null),
+                throw new CustomError(
+                    HttpStatus.UNPROCESSABLE_ENTITY,
+                    '올바르지 않은 컨테이너 ID 입니다.',
                 );
                 return;
             }
             const resData = await this.containerService.getContainerStatus(containerId);
             res.status(200).json(createResponseVo(true, '컨테이너 상태 조회 성공', resData));
         } else {
-            res.status(400).json(createResponseVo(false, '컨테이너 ID가 필요합니다', null));
+            throw new CustomError(HttpStatus.BAD_REQUEST, '컨테이너 ID가 필요합니다.');
         }
     };
 
