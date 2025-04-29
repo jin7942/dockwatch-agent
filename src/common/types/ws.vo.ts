@@ -35,6 +35,6 @@ export interface TopTableStreamVo {
     /** 메모리 사용 비율 (ex: 2.3) */
     mem: number;
 
-    /** 실행 명령어 (ex: 'myusqld'등) */
+    /** 실행 명령어 (ex: 'mysqld'등) */
     command: string;
 }

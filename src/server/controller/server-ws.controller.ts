@@ -31,7 +31,7 @@ export class ServerWsController {
      * @route CONNECTION /ws/server/network
      * @param  클라이언트 WebSocket
      */
-    public hadnleNetworkUsageStream = (ws: WebSocket): void => {
+    public handleNetworkUsageStream = (ws: WebSocket): void => {
         setWsIntervalSender(
             ws,
             this.serverWsService.getNetworkUsage,

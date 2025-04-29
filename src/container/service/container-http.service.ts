@@ -54,7 +54,7 @@ export class ContainerService {
         return exists;
     };
 
-    public startContinaer = async (dto: ContainerDto): Promise<void> => {};
-    public stopContinaer = async (dto: ContainerDto): Promise<void> => {};
-    public reStartContinaer = async (dto: ContainerDto): Promise<void> => {};
+    public startContainer = async (dto: ContainerDto): Promise<void> => {};
+    public stopContainer = async (dto: ContainerDto): Promise<void> => {};
+    public reStartContainer = async (dto: ContainerDto): Promise<void> => {};
 }

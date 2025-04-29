@@ -77,7 +77,7 @@ export class ServerWsService {
         const [load, processes] = await Promise.all([si.currentLoad(), si.processes()]);
         const topTable: TopTableStreamVo[] = this.buildTopTable(processes, 'cpu');
 
-        const cpuUsageStreamVo: CpuUsageStreamVo = { usagePersent: load.currentLoad, topTable };
+        const cpuUsageStreamVo: CpuUsageStreamVo = { usagePercent: load.currentLoad, topTable };
 
         return cpuUsageStreamVo;
     };
@@ -89,10 +89,10 @@ export class ServerWsService {
      */
     private getMemoryUsage = async (): Promise<MemoryUsageStreamVo> => {
         const [mem, processes] = await Promise.all([si.mem(), si.processes()]);
-        const usagePersent = (mem.active / mem.total) * 100;
+        const usagePercent = (mem.active / mem.total) * 100;
         const topTable: TopTableStreamVo[] = this.buildTopTable(processes, 'mem');
 
-        const memoryUsageStreamVo: MemoryUsageStreamVo = { usagePersent, topTable };
+        const memoryUsageStreamVo: MemoryUsageStreamVo = { usagePercent, topTable };
 
         return memoryUsageStreamVo;
     };

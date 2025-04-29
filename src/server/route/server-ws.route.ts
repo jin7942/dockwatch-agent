@@ -8,7 +8,7 @@ export class ServerWsRouter {
         // 라우팅 테이블
         const routes: Record<string, (ws: WebSocket) => void> = {
             '/usage': this.serverWsController.handleServerUsageStream,
-            '/network': this.serverWsController.hadnleNetworkUsageStream,
+            '/network': this.serverWsController.handleNetworkUsageStream,
         };
 
         const handler = routes[pathname];

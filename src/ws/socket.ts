@@ -48,7 +48,7 @@ export const initWebSocketServer = (server: HttpServer) => {
 
         // /ws/domain 까지만 라우팅 (ex: '/ws/server/usage' -> '/ws/server')
         const domainPrefix = pathname.split('/').slice(0, 3).join('/');
-        // /ws/domain/subdomain 에서 subdoamin 만 추출
+        // /ws/domain/subdomain 에서 sub-domain 만 추출
         const subPath = pathname.substring(domainPrefix.length);
 
         const handler = domainRouter[domainPrefix];

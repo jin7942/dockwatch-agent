@@ -14,7 +14,7 @@ export interface UsageStreamVo {
  */
 export interface CpuUsageStreamVo {
     /**  사용율 (ex: 30) */
-    usagePersent: number;
+    usagePercent: number;
 
     /** CPU 사용 top table */
     topTable: TopTableStreamVo[];
@@ -25,7 +25,7 @@ export interface CpuUsageStreamVo {
  */
 export interface MemoryUsageStreamVo {
     /** 사용율 (ex: 30) */
-    usagePersent: number;
+    usagePercent: number;
 
     /** 메모리 사용 top table */
     topTable: TopTableStreamVo[];
