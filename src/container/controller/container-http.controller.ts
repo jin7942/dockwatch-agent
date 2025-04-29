@@ -1,6 +1,6 @@
 // container 컨트롤러
 import { Request, Response } from 'express';
-import { sendHttpResponse } from '../../common/utils/utilHttp';
+import { sendHttpResponse } from '../../common/utils/http-util';
 
 //interface 정의
 import { ResponseVo } from '../../common/types/response.vo';
@@ -8,7 +8,7 @@ import { Container } from '../dto/container-http.vo';
 import { ContainerDto } from '../dto/container-http.dto';
 
 import { ContainerService } from '../service/container-http.service';
-import { createResponseVo } from '../../common/utils/utilCreate';
+import { createResponseVo } from '../../common/utils/create-util';
 
 export class ContainerController {
     private containerService = new ContainerService();

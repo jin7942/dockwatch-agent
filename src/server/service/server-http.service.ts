@@ -15,7 +15,7 @@ import { exec } from 'child_process';
 import util from 'util';
 
 // 직접 구현한 유틸 모듈
-import { parseSize } from '../../common/utils/utilParser';
+import { parseSize } from '../../common/utils/parser-util';
 
 // systeminformation networkInterfaces() 결과를 위한 내부 타입
 interface SiNetworkInterfaceData {

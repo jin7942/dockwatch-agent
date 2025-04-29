@@ -1,7 +1,7 @@
 // Http 관련 유틸
 
 import { Response } from 'express';
-import { createResponseVo } from './utilCreate';
+import { createResponseVo } from './create-util';
 
 /**
  * HTTP 요청을 처리하고 표준 응답을 전송하는 유틸 함수

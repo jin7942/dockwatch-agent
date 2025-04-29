@@ -1,7 +1,7 @@
 // WebSocket 스트림 유틸
 
 import { WebSocket } from 'ws';
-import { createWsResponseVo } from './utilCreate';
+import { createWsResponseVo } from './create-util';
 
 /**
  * WebSocket 주기 송신 유틸

@@ -1,6 +1,6 @@
 import { WebSocketServer, WebSocket } from 'ws';
 import { DashboardService } from '../service/dashboard.service';
-import { createWsResponse } from '../../common/utils/utilCreate';
+import { createWsResponse } from '../../common/utils/create-util';
 
 const dashboardService = new DashboardService();
 

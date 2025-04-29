@@ -1,6 +1,6 @@
 import { WebSocket } from 'ws';
 import { ServerWsService } from '../service/server-ws.service';
-import { setWsIntervalSender } from '../../common/utils/utilWs';
+import { setWsIntervalSender } from '../../common/utils/ws-util';
 import { WsVo } from '../../common/types/ws.vo';
 import os from 'os';
 /**
