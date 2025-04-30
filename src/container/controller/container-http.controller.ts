@@ -22,7 +22,7 @@ export class ContainerController {
     };
 
     /**
-     * 컨테이너 상태 조회
+     * 컨테이너 상태 조회 API
      *
      * @route GET /api/container/status?containerId=xxxxx
      * @param req 쿼리 스트링에서 containerId를 받는다.
@@ -31,15 +31,11 @@ export class ContainerController {
     public getContainerStatus = async (req: Request, res: Response): Promise<void> => {
         const { containerId } = req.query;
 
+        // 타입 체크
         if (typeof containerId === 'string') {
-            // 유효성 검증 후 처리
-            if (!this.isValidContainerId(containerId)) {
-                throw new CustomError(
-                    HttpStatus.UNPROCESSABLE_ENTITY,
-                    '올바르지 않은 컨테이너 ID 입니다.',
-                );
-                return;
-            }
+            // 유효성 검사
+            this.validContainerId(containerId);
+
             const resData = await this.containerService.getContainerStatus(containerId);
             res.status(200).json(createResponseVo(true, '컨테이너 상태 조회 성공', resData));
         } else {
@@ -47,28 +43,66 @@ export class ContainerController {
         }
     };
 
+    /**
+     * 특정 컨테이너 실행 API
+     *
+     * @route POST /api/container/start
+     * @param req 컨테이너ID가 포함된 dto
+     * @returns 실행 결과 success: true | false, data 부분은 null
+     */
     public startContainer = async (req: Request, res: Response): Promise<void> => {
-        // 아직 구현 안 함
+        const dto: ContainerDto = req.body;
+        this.validContainerId(dto.id);
+        await this.containerService.startContainer(dto);
+        res.status(200).json(createResponseVo(true, '컨테이너 시작 성공', null));
     };
 
+    /**
+     * 특정 컨테이너 중지 API
+     *
+     * @route POST /api/container/stop
+     * @param req 컨테이너ID가 포함된 dto
+     * @returns 실행 결과 success: true | false, data 부분은 null
+     */
     public stopContainer = async (req: Request, res: Response): Promise<void> => {
-        // 아직 구현 안 함
+        const dto: ContainerDto = req.body;
+        this.validContainerId(dto.id);
+        await this.containerService.stopContainer(dto);
+        res.status(200).json(createResponseVo(true, '컨테이너 중지 성공', null));
     };
 
+    /**
+     * 특정 컨테이너 재시작 API
+     *
+     * @route POST /api/container/restart
+     * @param req 컨테이너ID가 포함된 dto
+     * @returns 실행 결과 success: true | false, data 부분은 null
+     */
     public reStartContainer = async (req: Request, res: Response): Promise<void> => {
-        // 아직 구현 안 함
+        const dto: ContainerDto = req.body;
+        this.validContainerId(dto.id);
+        await this.containerService.reStartContainer(dto);
+        res.status(200).json(createResponseVo(true, '컨테이너 재시작 성공', null));
     };
 
     /**
      * 컨테이너 ID 유효성 검증 함수
      * - [a-f0-9]{12,64} 정규식으로 검증
+     * - 검증을 통과하지 못하면 에러 발생
      *
      * @param containerId 컨테이너 ID
-     * @returns true / false
      */
-    private isValidContainerId = (containerId: string): boolean => {
+    private validContainerId = (containerId: any): void => {
         // Docker 컨테이너 ID는 12자리 이상의 16진수로 되어있음
         const regex: RegExp = /^[a-f0-9]{12,64}$/;
-        return regex.test(containerId);
+
+        const result: boolean = regex.test(containerId);
+
+        if (!result) {
+            throw new CustomError(
+                HttpStatus.UNPROCESSABLE_ENTITY,
+                '올바르지 않은 컨테이너 ID 입니다.',
+            );
+        }
     };
 }
