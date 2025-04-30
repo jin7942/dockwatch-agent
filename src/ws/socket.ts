@@ -1,6 +1,8 @@
 import { Server as HttpServer } from 'http';
 import { Server as WebSocketServer, WebSocket } from 'ws';
 import { ServerWsRouter } from '../server/route/server-ws.route';
+import { LogWsRouter } from '../log/route/log-ws.route';
+import { IncomingMessage } from 'http';
 
 /**
  * 커넥션 헬스체크용 커스텀 WebSocket 타입
@@ -11,12 +13,17 @@ interface ExtendedWebSocket extends WebSocket {
 
 // 도메인별 컨트롤러
 const serverWsRouter = new ServerWsRouter();
+const logWsRouter = new LogWsRouter();
 
 /**
  * WebSocket 도메인 라우팅 테이블
  */
-const domainRouter: Record<string, (ws: WebSocket, pathname: string) => void> = {
+const domainRouter: Record<
+    string,
+    (ws: WebSocket, pathname: string, req: IncomingMessage) => void
+> = {
     '/ws/server': serverWsRouter.handle,
+    '/ws/log': logWsRouter.handle,
 };
 
 /**

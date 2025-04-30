@@ -92,7 +92,7 @@ export class ContainerController {
      *
      * @param containerId 컨테이너 ID
      */
-    private validContainerId = (containerId: any): void => {
+    public validContainerId = (containerId: any): void => {
         // Docker 컨테이너 ID는 12자리 이상의 16진수로 되어있음
         const regex: RegExp = /^[a-f0-9]{12,64}$/;
 

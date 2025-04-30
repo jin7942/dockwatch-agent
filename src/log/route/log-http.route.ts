@@ -5,6 +5,6 @@ import { Router } from 'express';
 const logRouter: Router = Router();
 const logController: LogController = new LogController();
 
-// logRouter.get('', asyncHandler(logController))
+logRouter.get('/active', asyncHandler(logController.getRunningContainers));
 
 export { logRouter };
