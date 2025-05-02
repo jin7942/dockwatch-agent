@@ -3,6 +3,7 @@ import { Server as WebSocketServer, WebSocket } from 'ws';
 import { ServerWsRouter } from '../server/route/server-ws.route';
 import { LogWsRouter } from '../log/route/log-ws.route';
 import { IncomingMessage } from 'http';
+import { ContainerWsRouter } from '../container/route/container-ws.route';
 
 /**
  * 커넥션 헬스체크용 커스텀 WebSocket 타입
@@ -14,6 +15,7 @@ interface ExtendedWebSocket extends WebSocket {
 // 도메인별 컨트롤러
 const serverWsRouter = new ServerWsRouter();
 const logWsRouter = new LogWsRouter();
+const containerWsRouter = new ContainerWsRouter();
 
 /**
  * WebSocket 도메인 라우팅 테이블
@@ -24,6 +26,7 @@ const domainRouter: Record<
 > = {
     '/ws/server': serverWsRouter.handle,
     '/ws/log': logWsRouter.handle,
+    '/ws/container': containerWsRouter.handle,
 };
 
 /**
@@ -60,7 +63,7 @@ export const initWebSocketServer = (server: HttpServer) => {
 
         const handler = domainRouter[domainPrefix];
         if (handler) {
-            handler(extWs, subPath);
+            handler(extWs, subPath, request);
         } else {
             extWs.close(1000, 'Unknown WebSocket domain route');
         }

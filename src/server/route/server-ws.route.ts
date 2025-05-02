@@ -5,7 +5,7 @@ import { IncomingMessage } from 'http';
 export class ServerWsRouter {
     private serverWsController: ServerWsController = new ServerWsController();
 
-    public handle = (ws: WebSocket, pathname: string) => {
+    public handle = (ws: WebSocket, pathname: string, _req: IncomingMessage /** req 안씀 */) => {
         // 라우팅 테이블
         const routes: Record<string, (ws: WebSocket) => void> = {
             '/usage': this.serverWsController.handleServerUsageStream,

@@ -1,5 +1,5 @@
 /** 컨테이너 리스트 */
-export interface Container {
+export interface ContainerVo {
     /** 컨테이너 ID */
     id: string;
 

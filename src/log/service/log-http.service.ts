@@ -1,4 +1,4 @@
-import { Container } from '../dto/log-http.vo';
+import { ContainerVo } from '../dto/log-http.vo';
 import { execDockerCommand } from '../../common/utils/docker-util';
 import { CustomError } from '../../common/error/custom-error';
 import { HttpStatus } from '../../common/types/http-status.enum';
@@ -11,13 +11,13 @@ export class LogService {
      *
      * @returns 실행 중인 컨테이너 배열
      */
-    public getRunningContainers = async (): Promise<Container[]> => {
+    public getRunningContainers = async (): Promise<ContainerVo[]> => {
         const result = await execDockerCommand(
             ['ps', '--format', '{{.ID}} {{.Names}}'],
             '실행 중인 컨테이너 리스트 조회 실패',
         );
 
-        const containerList: Container[] = result
+        const containerList: ContainerVo[] = result
             .split('\n')
             .filter((line) => line)
             .map((line) => {

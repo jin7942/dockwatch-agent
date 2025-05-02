@@ -14,7 +14,7 @@ export class LogWsController {
     /**
      * 컨테이너별 실시간 로그 스트림 핸들러
      *
-     * @route CONNECTION /ws/log/stream
+     * @route CONNECTION /ws/log/stream?containerId=xxxxxxx
      * @param ws
      * @param req containerId를 쿼리 스트링으로 받음
      */

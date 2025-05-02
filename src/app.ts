@@ -2,7 +2,7 @@ import express from 'express';
 import { serverRouter } from './server/route/server-http.route';
 import { errorHandler } from './common/error/error-handler';
 import { logRouter } from './log/route/log-http.route';
-import { containerRouter } from './container/route/continaer-http.route';
+import { containerRouter } from './container/route/container-http.route';
 
 const app = express();
 

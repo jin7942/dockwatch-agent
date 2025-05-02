@@ -8,7 +8,10 @@ const containerController: ContainerController = new ContainerController();
 // GET /api/container/list
 containerRouter.get('/list', asyncHandler(containerController.getContainerList));
 
-// GET /api/container/status
+// GET /api/container/info?containerId=xxxxx
+containerRouter.get('/info', asyncHandler(containerController.getContainerInfo));
+
+// GET /api/container/status?containerId=xxxxx
 containerRouter.get('/status', asyncHandler(containerController.getContainerStatus));
 
 // POST /api/container/start
