@@ -4,6 +4,7 @@ export enum HttpStatus {
     UNAUTHORIZED = 401, // 인증 필요
     FORBIDDEN = 403, // 권한 없음
     NOT_FOUND = 404, // 요청 리소스 없음
+    REQUEST_TIMEOUT = 408, // 요청 타임아웃
     CONFLICT = 409, // 리소스 충돌 (ex: 중복 데이터)
     UNPROCESSABLE_ENTITY = 422, // 유효하지만 처리할 수 없는 요청 (유효성 검증 실패 등)
 

@@ -16,6 +16,7 @@ import util from 'util';
 
 // 직접 구현한 유틸 모듈
 import { parseSize } from '../../common/utils/parser-util';
+import { execDockerCommand } from '../../common/utils/docker-util';
 
 // systeminformation networkInterfaces() 결과를 위한 내부 타입
 interface SiNetworkInterfaceData {
@@ -131,28 +132,26 @@ export class ServerService {
      * @returns  컨테이너별 디스크 사용량 배열
      */
     public getDiskUsageByContainer = async (): Promise<DiskUsageByContainerVo[]> => {
-        const execAsync = util.promisify(exec);
+        // 1. 실행 중인 컨테이너 ID 목록
+        const psResult = await execDockerCommand(['ps', '--format', '{{.ID}}']);
+        const runningContainerIds = psResult.split('\n').filter((id) => id);
 
-        // 1. 실행 중인 컨테이너 ID 목록 가져오기
-        const { stdout: psStdout } = await execAsync('docker ps --format "{{.ID}}"');
-        const runningContainerIds = psStdout.split('\n').filter((id) => id);
+        // 2. 디스크 사용량 조회
+        const dfResult = await execDockerCommand(['system', 'df', '-v']);
+        const lines = dfResult.split('\n');
 
-        // 2. 전체 컨테이너 디스크 사용량 가져오기
-        const { stdout: dfStdout } = await execAsync('docker system df -v');
-        const lines = dfStdout.split('\n');
+        // 3. 해당 컨테이너만 필터링
+        const containerLines = lines.filter((line) =>
+            runningContainerIds.some((id) => line.startsWith(id)),
+        );
 
-        // 3. 필요한 부분 필터링
-        const containerLines = lines.filter((line) => {
-            return runningContainerIds.some((id) => line.startsWith(id));
-        });
-
-        // 4. 매핑
+        // 4. 파싱 및 반환
         const containerUsageList: DiskUsageByContainerVo[] = containerLines.map((line) => {
             const parts = line.split(/\s+/);
             return {
-                name: parts[1], // 컨테이너 이름
-                used: parseSize(parts[2]), // 사용량
-                isActive: true, // running만 가져오니까 무조건 true
+                name: parts[1],
+                used: parseSize(parts[2]),
+                isActive: true,
             };
         });
 

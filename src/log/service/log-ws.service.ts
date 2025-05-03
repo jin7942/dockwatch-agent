@@ -9,6 +9,7 @@ export class LogWsService {
      * docker logs -f <containerId> 실행
      * - stdout 스트림을 반환
      * - WebSocket 스트림 유틸에서 전달 처리
+     * - 이벤트 기반 로그 출력이기에 도커 유틸 사용 안했음
      */
     public getLogStream = (containerId: string): Readable => {
         try {
@@ -17,8 +18,6 @@ export class LogWsService {
                 '-f',
                 containerId,
             ]);
-
-            // docker 명령이 실패한 경우 stderr로 메시지가 나올 수 있으니 필요하면 따로 처리 가능
 
             return process.stdout; // stdout 스트림 반환
         } catch (err) {
