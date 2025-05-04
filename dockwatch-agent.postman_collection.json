@@ -1,16 +1,16 @@
 {
     "info": {
         "name": "dockwatch-agent",
-        "description": "dockwatch-agent API Collection",
+        "description": "API 컬렉션 모음, 단순 조회 API만 포함(POST API 제외),(쿼리스트링 필요 API도 제외),(WebSocket은 컬렉션 지원이 불가하므로 직접 추가해야됨)",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
         {
             "name": "Server",
-            "description": "서버 관련 API(WebSocket은 컬렉션 지원이 불가하므로 직접 추가해야됨)",
+            "description": "서버 도메인 관련 API",
             "item": [
                 {
-                    "name": "Get Server Info",
+                    "name": "서버 기본 정보 조회 API",
                     "request": {
                         "method": "GET",
                         "header": [],
@@ -73,7 +73,7 @@
                     "name": "Ws Server Usage",
                     "event": [],
                     "request": {
-                        "method": "GET",
+                        "method": "WebSocket",
                         "header": [],
                         "url": {
                             "raw": "ws://localhost:7000/ws/server/usage",
@@ -86,10 +86,10 @@
                     "response": []
                 },
                 {
-                    "name": "Ws Netwrok Usage",
+                    "name": "Ws Network Usage",
                     "event": [],
                     "request": {
-                        "method": "GET",
+                        "method": "WebSocket",
                         "header": [],
                         "url": {
                             "raw": "ws://localhost:7000/ws/server/network",
@@ -102,6 +102,53 @@
                     "response": []
                 }
             ]
+        },
+        {
+            "name": "Log",
+            "description": "로그 도메인 관련 API",
+            "item": [
+                {
+                    "name": "실행중인 컨테이너 리스트 조회 API",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:7000/api/log/active",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "7000",
+                            "path": ["api", "log", "active"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Container",
+            "description": "컨테이너 도메인 관련 API",
+            "item": [
+                {
+                    "name": "컨테이너 리스트 조회 API",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:7000/api/container/list",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "7000",
+                            "path": ["api", "container", "list"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Dashboard",
+            "description": "대시보드 도메인 관련 API",
+            "item": []
         }
     ]
 }
