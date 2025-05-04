@@ -14,10 +14,10 @@ export class ContainerController {
      * 컨테이너 리스트 조회 API
      *
      * @route GET /api/container/list
-     * @returns 컨테이너 리스트
+     * @returns {ContainerVo[]} 컨테이너 리스트
      */
     public getContainerList = async (req: Request, res: Response): Promise<void> => {
-        const resData = await this.containerService.getContainerList();
+        const resData: ContainerVo[] = await this.containerService.getContainerList();
         res.status(200).json(createResponseVo(true, '컨테이너 리스트 조회 성공', resData));
     };
 
@@ -26,7 +26,7 @@ export class ContainerController {
      *
      * @route GET /api/container/info?containerId=xxxx
      * @param req 쿼리 스트링에서 containerId를 받는다.
-     * @param res 컨테이너 정보를 포함한 JSON 객체
+     * @returns {ContainerVo} 컨테이너 정보를 포함한 JSON 객체
      */
     public getContainerInfo = async (req: Request, res: Response): Promise<void> => {
         const { containerId } = req.query;
@@ -36,7 +36,7 @@ export class ContainerController {
             // 유효성 검사
             this.validContainerId(containerId);
 
-            const resData = await this.containerService.getContainerInfo(containerId);
+            const resData: ContainerVo = await this.containerService.getContainerInfo(containerId);
             res.status(200).json(createResponseVo(true, '컨테이너 상태 조회 성공', resData));
         } else {
             throw new CustomError(HttpStatus.BAD_REQUEST, '컨테이너 ID가 필요합니다.');
@@ -58,7 +58,7 @@ export class ContainerController {
             // 유효성 검사
             this.validContainerId(containerId);
 
-            const resData = await this.containerService.getContainerStatus(containerId);
+            const resData: boolean = await this.containerService.getContainerStatus(containerId);
             res.status(200).json(createResponseVo(true, '컨테이너 상태 조회 성공', resData));
         } else {
             throw new CustomError(HttpStatus.BAD_REQUEST, '컨테이너 ID가 필요합니다.');
