@@ -3,6 +3,7 @@ import { serverRouter } from './server/route/server-http.route';
 import { errorHandler } from './common/error/error-handler';
 import { logRouter } from './log/route/log-http.route';
 import { containerRouter } from './container/route/container-http.route';
+import { dashboardRouter } from './dashboard/route/dashboard-http.route';
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use('/api/server', serverRouter);
 app.use('/api/container', containerRouter);
 app.use('/api/log', logRouter);
+app.use('/api/dashboard', dashboardRouter);
 
 // 공통 에러 핸들러 등록
 app.use(errorHandler);
