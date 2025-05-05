@@ -148,7 +148,38 @@
         {
             "name": "Dashboard",
             "description": "대시보드 도메인 관련 API",
-            "item": []
+            "item": [
+                {
+                    "name": "대시보드 조회 API",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:7000/api/dashboard/info",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "7000",
+                            "path": ["api", "dashboard", "info"]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "대시보드용 실시간 자원 조회 핸들러",
+                    "request": {
+                        "method": "WebSocket",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:7000/ws/dashboard/info",
+                            "protocol": "ws",
+                            "host": ["localhost"],
+                            "port": "7000",
+                            "path": ["ws", "dashboard", "info"]
+                        }
+                    },
+                    "response": []
+                }
+            ]
         }
     ]
 }

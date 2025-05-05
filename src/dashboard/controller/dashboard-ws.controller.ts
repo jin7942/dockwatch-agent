@@ -8,7 +8,7 @@ export class DashboardWsController {
     private hostname = os.hostname();
 
     /**
-     * 대시보드용 실시간 자원 조회 API
+     * 대시보드용 실시간 자원 조회 핸들러
      *
      * @route CONNECTION /ws/dashboard/info
      * @param ws
