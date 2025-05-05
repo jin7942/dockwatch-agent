@@ -1,4 +1,5 @@
 import { ContainerResourceStreamVo } from '../../container/dto/container-ws.vo';
+import { ContainerVo } from '../../container/dto/container-http.vo';
 
 /** 대시보드용 실시간 서버 사용량 */
 export interface SysUsageStreamVo {
@@ -15,13 +16,7 @@ export interface SysUsageStreamVo {
     runningContainer: RunningContainer[];
 }
 
-export interface RunningContainer {
-    /** 컨테이너 이름 */
-    name: string;
-    /** 사용중인 이미지 */
-    image: string;
-    /** 상태 */
-    status: 'running' | 'exited' | 'paused';
+export interface RunningContainer extends ContainerVo {
     /** 사용율(cpu, mem) */
     usage: ContainerResourceStreamVo;
 }
