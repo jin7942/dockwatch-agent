@@ -7,6 +7,12 @@ export class DashboardWsController {
     private dashboardWsService = new DashboardWsService();
     private hostname = os.hostname();
 
+    /**
+     * 대시보드용 실시간 자원 조회 API
+     *
+     * @route CONNECTION /ws/dashboard/info
+     * @param ws
+     */
     public handleSysUsage = (ws: WebSocket): void => {
         setWsIntervalSender(
             ws,

@@ -8,7 +8,7 @@ export class DashboardWsRouter {
     public handle = (ws: WebSocket, pathname: string, req: IncomingMessage) => {
         // 라우팅 테이블
         const routes: Record<string, (ws: WebSocket, req: IncomingMessage) => void> = {
-            // '/view': this.dashboardWsController.,
+            '/info': this.dashboardWsController.handleSysUsage,
         };
 
         const handler = routes[pathname];
