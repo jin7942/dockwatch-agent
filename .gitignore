@@ -3,4 +3,4 @@ dist
 .env
 logs
 *.log
-release
+release/dockwatch-agent
