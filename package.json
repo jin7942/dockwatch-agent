@@ -1,6 +1,6 @@
 {
     "name": "dockwatch-agent",
-    "version": "1.0.0",
+    "version": "0.9.0",
     "main": "src/index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -8,6 +8,17 @@
         "build": "tsc",
         "start": "node dist/index.js",
         "docs": "typedoc"
+    },
+    "bin": "dist/index.js",
+    "pkg": {
+        "scripts": "dist/**/*.js",
+        "assets": [
+            "node_modules/**/*"
+        ],
+        "targets": [
+            "node18-linux-x64"
+        ],
+        "outputPath": "release"
     },
     "repository": {
         "type": "git",
@@ -31,6 +42,7 @@
         "@types/node": "^22.15.2",
         "@types/ws": "^8.18.1",
         "nodemon": "^3.1.10",
+        "pkg": "^5.8.1",
         "ts-node": "^10.9.2"
     }
 }
