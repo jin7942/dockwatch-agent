@@ -26,7 +26,7 @@ export const errorHandler = (
     } else {
         console.error(err);
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(
-            createResponseVo(false, 'Internal Server Error', {
+            createResponseVo(false, '[Agent]: Internal Server Error', {
                 code: HttpStatus.INTERNAL_SERVER_ERROR,
             }),
         );
