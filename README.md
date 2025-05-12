@@ -4,7 +4,7 @@
 
 Dockwatch 프로젝트에서 도커 컨테이너와 서버 리소스 등을 수집하여 실시간, HTTP 로 제공하는 에이전트 입니다. 실행 파일을 데몬으로 등록하여 사용하거나, node로 사용할 수 있습니다.
 
-해당 에이전트는 보안 로직이 포함되어 있지 않습니다. 모든 보안 및 인증은 [dockwatch-backend](https://github.com/jin7942/dockwatch/backend) 에서 수행합니다.
+해당 에이전트는 보안 로직이 포함되어 있지 않습니다. 모든 보안 및 인증은 [dockwatch-backend](https://github.com/jin7942/dockwatch/tree/main/backend) 에서 수행합니다.
 
 해당 에이전트는 TypeScript + Express 로 제작 되었으며, 코드 컨벤션은 [typescript-nodejs-convention.md](https://github.com/jin7942/dev-guide/blob/main/typescript-nodejs-convention.md)를 따릅니다.
 
