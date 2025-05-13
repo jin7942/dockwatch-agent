@@ -35,7 +35,7 @@ export class ContainerService {
                 'ps',
                 '-a',
                 '--format',
-                '{{.ID}} {{.Names}} {{.Image}} {{.Status}} {{.Ports}} {{.Network}}',
+                '{{.ID}} {{.Names}} {{.Image}} {{.Status}} {{.Ports}} {{.Networks}}',
             ],
             '컨테이너 리스트 조회 실패',
         );

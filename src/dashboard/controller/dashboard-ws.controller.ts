@@ -17,7 +17,7 @@ export class DashboardWsController {
         setWsIntervalSender(
             ws,
             this.dashboardWsService.getSysUsageStream,
-            'server-usage',
+            'dashboard-usage',
             this.hostname,
         );
     };
