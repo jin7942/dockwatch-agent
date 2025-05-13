@@ -40,7 +40,7 @@ export class DashboardWsService {
      * @returns CPU 사용율
      */
     private getCpuPerc = async (): Promise<number> => {
-        return await si.fullLoad();
+        return (await si.fullLoad()) * 100;
     };
 
     /**
