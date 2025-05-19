@@ -74,10 +74,10 @@ export class ServerWsService {
      * @returns CPU 사용률, TopTable 상위 10개 rows
      */
     private getCpuUsage = async (): Promise<CpuUsageStreamVo> => {
-        const [load, processes] = await Promise.all([si.currentLoad(), si.processes()]);
+        const [load, processes] = await Promise.all([si.fullLoad(), si.processes()]);
         const topTable: TopTableStreamVo[] = this.buildTopTable(processes, 'cpu');
 
-        const cpuUsageStreamVo: CpuUsageStreamVo = { usagePercent: load.currentLoad, topTable };
+        const cpuUsageStreamVo: CpuUsageStreamVo = { usagePercent: load * 100, topTable };
 
         return cpuUsageStreamVo;
     };
@@ -103,8 +103,8 @@ export class ServerWsService {
      * @returns I/O 평균속도(bps)
      */
     private getDiskUsage = async (): Promise<DiskUsageStreamVo> => {
-        const io = await si.disksIO();
-        const activity = (io.rIO + io.wIO) / 2;
+        const io = await si.fsStats();
+        const activity = io.rx_sec == null || io.wx_sec == null ? 0 : (io.rx_sec + io.wx_sec) / 2;
 
         const diskUsageStreamVo: DiskUsageStreamVo = { activity };
 
