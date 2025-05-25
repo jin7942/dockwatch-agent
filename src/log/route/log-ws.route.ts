@@ -8,7 +8,7 @@ export class LogWsRouter {
     public handle = (ws: WebSocket, pathname: string, req: IncomingMessage) => {
         // 라우팅 테이블
         const routes: Record<string, (ws: WebSocket, req: IncomingMessage) => void> = {
-            '/view': this.logWsController.handleLogStream,
+            '/stream': this.logWsController.handleLogStream,
         };
 
         const handler = routes[pathname];
