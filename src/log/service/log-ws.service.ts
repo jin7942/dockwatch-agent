@@ -6,7 +6,7 @@ import { Readable } from 'stream';
 
 export class LogWsService {
     /**
-     * docker logs -f <containerId> 실행
+     * docker logs -f --tail=20 <containerId> 실행
      * - stdout 스트림을 반환
      * - WebSocket 스트림 유틸에서 전달 처리
      * - 이벤트 기반 로그 출력이기에 도커 유틸 사용 안했음
@@ -16,6 +16,7 @@ export class LogWsService {
             const process: ChildProcessWithoutNullStreams = spawn('docker', [
                 'logs',
                 '-f',
+                '--tail=20',
                 containerId,
             ]);
 
