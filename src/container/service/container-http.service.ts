@@ -31,12 +31,7 @@ export class ContainerService {
      */
     public getContainerList = async (): Promise<ContainerVo[]> => {
         const result = await execDockerCommand(
-            [
-                'ps',
-                '-a',
-                '--format',
-                '{{.ID}} {{.Names}} {{.Image}} {{.Status}} {{.Ports}} {{.Networks}}',
-            ],
+            ['ps', '-a', '--format', '{{json .}}'],
             '컨테이너 리스트 조회 실패',
         );
 
@@ -44,8 +39,15 @@ export class ContainerService {
             .split('\n')
             .filter((line) => line)
             .map((line) => {
-                const [id, name, image, status, ports, network] = line.split(/\s+/);
-                return { id, name, image, status, ports, network };
+                const data = JSON.parse(line);
+                return {
+                    id: data.ID,
+                    name: data.Names,
+                    image: data.Image,
+                    status: data.Status,
+                    ports: data.Ports,
+                    network: data.Networks,
+                };
             });
 
         return containerList;
