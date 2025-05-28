@@ -78,18 +78,18 @@ export class ContainerService {
         const network = Object.keys(data.NetworkSettings.Networks || {}).join(', ');
 
         // 2. 디스크 사용량 계산
-        const mountPath = data.GraphDriver?.Data?.MergedDir;
-        let diskUsage: number | undefined = undefined;
+        // const mountPath = data.GraphDriver?.Data?.MergedDir;
+        // let diskUsage: number | undefined = undefined;
 
-        if (mountPath) {
-            const duOutput = await execDockerCommand(
-                ['du', '-s', '-b', mountPath],
-                '디스크 사용량 조회 실패',
-            );
-            diskUsage = parseInt(duOutput.trim().split(/\s+/)[0], 10);
-        }
+        // if (mountPath) {
+        //     const duOutput = await execDockerCommand(
+        //         ['du', '-s', '-b', mountPath],
+        //         '디스크 사용량 조회 실패',
+        //     );
+        //     diskUsage = parseInt(duOutput.trim().split(/\s+/)[0], 10);
+        // }
 
-        const resData: ContainerVo = { id, name, image, status, ports, network, diskUsage };
+        const resData: ContainerVo = { id, name, image, status, ports, network };
         return resData;
     };
 

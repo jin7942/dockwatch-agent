@@ -196,8 +196,7 @@ export interface ContainerVo {
         "image": "mysql:8.0",
         "status": "Up 12 days",
         "ports": "0.0.0.0:1234->5678/tcp",
-        "network": "jin-network",
-        "diskUsage": 104857600
+        "network": "jin-network"
     }
 }
 ```
