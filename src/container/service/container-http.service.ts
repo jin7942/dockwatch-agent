@@ -83,10 +83,10 @@ export class ContainerService {
 
         if (mountPath) {
             const duOutput = await execDockerCommand(
-                ['du', '-sb', mountPath],
+                ['du', '-s', '-b', mountPath],
                 '디스크 사용량 조회 실패',
             );
-            diskUsage = parseInt(duOutput.split('\t')[0], 10);
+            diskUsage = parseInt(duOutput.trim().split(/\s+/)[0], 10);
         }
 
         const resData: ContainerVo = { id, name, image, status, ports, network, diskUsage };
