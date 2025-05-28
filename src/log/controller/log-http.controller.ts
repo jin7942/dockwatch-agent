@@ -31,14 +31,14 @@ export class LogController {
      * @requestBody {LogPathDto}
      * @returns {TreeNodeVo[]} 디렉터리 정보를 포함한 JSON 배열
      */
-    public getDirectoryTree = async (req: Request, res: Response): Promise<void> => {
-        const dirPath: LogPathDto = req.body;
-        // 유효성 검사
-        this.validDirPath(dirPath.path);
+    // public getDirectoryTree = async (req: Request, res: Response): Promise<void> => {
+    //     const dirPath: LogPathDto = req.body;
+    //     // 유효성 검사
+    //     this.validDirPath(dirPath.path);
 
-        const resData: TreeNodeVo[] = await this.logService.getDirectoryTree(dirPath.path);
-        res.status(200).json(createResponseVo(true, '디렉터리 조회 성공', resData));
-    };
+    //     const resData: TreeNodeVo[] = await this.logService.getDirectoryTree(dirPath.path);
+    //     res.status(200).json(createResponseVo(true, '디렉터리 조회 성공', resData));
+    // };
 
     /**
      * 로그 파일 조회 API
@@ -49,14 +49,14 @@ export class LogController {
      * @requestBody {LogPathDto}
      * @returns {LogFileContentVo} 해당 파일의 전체 텍스트를 담은 JSON 객체
      */
-    public getLogFile = async (req: Request, res: Response): Promise<void> => {
-        const filePathDto: LogPathDto = req.body;
-        // 유효성 검사
-        this.validDirPath(filePathDto.path);
+    // public getLogFile = async (req: Request, res: Response): Promise<void> => {
+    //     const filePathDto: LogPathDto = req.body;
+    //     // 유효성 검사
+    //     this.validDirPath(filePathDto.path);
 
-        const resData: LogFileContentVo = await this.logService.getLogFile(filePathDto.path);
-        res.status(200).json(createResponseVo(true, '파일 조회 성공', resData));
-    };
+    //     const resData: LogFileContentVo = await this.logService.getLogFile(filePathDto.path);
+    //     res.status(200).json(createResponseVo(true, '파일 조회 성공', resData));
+    // };
 
     /**
      * 디렉터리 유효성 검사 함수

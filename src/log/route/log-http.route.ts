@@ -6,7 +6,7 @@ const logRouter: Router = Router();
 const logController: LogController = new LogController();
 
 logRouter.get('/active', asyncHandler(logController.getRunningContainers));
-logRouter.post('/directory', asyncHandler(logController.getDirectoryTree));
-logRouter.post('/file', asyncHandler(logController.getLogFile));
+// logRouter.post('/directory', asyncHandler(logController.getDirectoryTree));
+// logRouter.post('/file', asyncHandler(logController.getLogFile));
 
 export { logRouter };

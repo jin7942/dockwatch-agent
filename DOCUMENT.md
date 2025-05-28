@@ -502,6 +502,10 @@ export interface ContainerVo {
 }
 ```
 
+**디렉터리 및 파일 조회 기능은 보류 되었습니다. 추후 보안 검토 후 다시 도입될 예정입니다. 현재는 비활서오하 상태입니다.**
+
+<del>
+
 ## 4.2. POST /api/log/directory
 
      * 로그 디렉터리 조회 API
@@ -629,6 +633,8 @@ export interface LogFileContentVo {
     content: string;
 }
 ```
+
+</del>
 
 ## 4.4. WS /ws/log/stream?containerId=xxxxxxx
 
