@@ -1,6 +1,6 @@
 # 1. dockwatch-agent
 
-**[ver: 0.9.0](https://github.com/jin7942/dockwatch-agent/releases/tag/v0.9.0)**
+**[ver: 1.0.0](https://github.com/jin7942/dockwatch-agent/releases/tag/v1.0.0)**
 
 Dockwatch 프로젝트에서 도커 컨테이너와 서버 리소스 등을 수집하여 실시간, HTTP 로 제공하는 에이전트 입니다. 실행 파일을 데몬으로 등록하여 사용하거나, node로 사용할 수 있습니다.
 
@@ -26,12 +26,12 @@ dockwatch의 전체 실행 흐름및 기능, 데모를 보실려면 아래 링�
 
 ### 1.2.1. 실행 파일
 
-[v0.9.0 릴리즈](https://github.com/jin7942/dockwatch-agent/releases/tag/v0.9.0) 에서 실행 파일을 다운로드하여 사용할 수 있습니다.
+[v1.0.0 릴리즈](https://github.com/jin7942/dockwatch-agent/releases/tag/v1.0.0) 에서 실행 파일을 다운로드하여 사용할 수 있습니다.
 
 현재는 **Linux-64만 지원(Node.js 불피요, 실행파일 standalone)** 하며, 타 OS환경은 직접 패키징을 필요로 합니다.
 
 ```bash
-wget https://github.com/jin7942/dockwatch-agent/releases/download/v0.9.0/dockwatch-agent
+wget https://github.com/jin7942/dockwatch-agent/releases/download/v1.0.0/dockwatch-agent
 ```
 
 ```bash
@@ -175,4 +175,4 @@ src
 
 # 6. 라이선스
 
-MIT
+본 프로젝트는 MIT 라이선스를 따릅니다.
